@@ -36,7 +36,6 @@
 #include "py/runtime.h"
 #include "py/builtin.h"
 #include "py/frozenmod.h"
-#include "definitions.h" 
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_PRINT (1)
@@ -100,9 +99,6 @@ STATIC mp_import_stat_t stat_file_py_or_mpy(vstr_t *path) {
 STATIC mp_import_stat_t stat_dir_or_file(vstr_t *path) {
     mp_import_stat_t stat = stat_path_or_frozen(vstr_null_terminated_str(path));
     DEBUG_printf("stat %s: %d\n", vstr_str(path), stat);
-
-    //SYS_CONSOLE_PRINT("stat %s: %d\n", vstr_str(path), stat);
-
     if (stat == MP_IMPORT_STAT_DIR) {
         return stat;
     }

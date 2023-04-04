@@ -40,9 +40,13 @@ Below are the MicroPython modules which supported in this project.
 * [gc](https://docs.micropython.org/en/latest/library/gc.html) - control the garbage collector
 * [uselect](https://docs.micropython.org/en/latest/library/select.html) - wait for events on a set of streams
 * [socket](network_socket.md) - socket module
+* [utime](https://docs.micropython.org/en/latest/library/time.html) - time related functions
+* [array](https://docs.micropython.org/en/latest/library/array.html) – arrays of numeric data
+* [ucollections](https://docs.micropython.org/en/latest/library/collections.html) – collection and container types
+* [ustruct](https://docs.micropython.org/en/latest/library/struct.html) – pack and unpack primitive data types
 
 ## MicroPython-specific libraries
-* [umachine](machine.md) - functions related to the hardware\
+* [umachine](machine.md) - functions related to the hardware
 * [network](wlan.md) - network configuration
 
 

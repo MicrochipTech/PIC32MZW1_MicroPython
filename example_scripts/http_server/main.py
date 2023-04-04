@@ -1,4 +1,9 @@
 import umachine
+import network
+
+ssid = 'demo_ap'
+password = '12345678'
+
 pins = [umachine.Pin(i, umachine.Pin.IN) for i in (16, 41, 47)]
 
 html = """<!DOCTYPE html>
@@ -10,10 +15,10 @@ html = """<!DOCTYPE html>
 </html>
 """
 
-import network
+
 nic=network.WLAN(network.STA_IF)
 nic.active(True)
-nic.connect('mchp_demo', 'mchp5678')
+nic.connect(ssid, password)
 while not nic.isconnected():
     pass
 print("wifi connection is done")

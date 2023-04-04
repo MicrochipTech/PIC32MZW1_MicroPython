@@ -32,7 +32,6 @@
 #include "py/qstr.h"
 #include "py/gc.h"
 #include "py/runtime.h"
-#include "definitions.h"
 
 // NOTE: we are using linear arrays to store and search for qstr's (unique strings, interned strings)
 // ultimately we will replace this with a static hash table of some kind
@@ -72,8 +71,6 @@ mp_uint_t qstr_compute_hash(const byte *data, size_t len) {
     if (hash == 0) {
         hash++;
     }
-    
-    ///SYS_CONSOLE_PRINT("data = %s, hash = 0x%d\r\n", data, hash);
     return hash;
 }
 

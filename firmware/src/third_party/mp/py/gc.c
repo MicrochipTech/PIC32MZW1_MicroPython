@@ -324,14 +324,13 @@ STATIC void gc_sweep(void) {
 }
 
 void gc_collect_start(void) {
-    printf("[%s] 1\r\n", __func__);
     GC_ENTER();
     MP_STATE_THREAD(gc_lock_depth)++;
     #if MICROPY_GC_ALLOC_THRESHOLD
     MP_STATE_MEM(gc_alloc_amount) = 0;
     #endif
     MP_STATE_MEM(gc_stack_overflow) = 0;
-    printf("[%s] 2\r\n", __func__);
+
     // Trace root pointers.  This relies on the root pointers being organised
     // correctly in the mp_state_ctx structure.  We scan nlr_top, dict_locals,
     // dict_globals, then the root pointer section of mp_state_vm.
@@ -339,7 +338,7 @@ void gc_collect_start(void) {
     size_t root_start = offsetof(mp_state_ctx_t, thread.dict_locals);
     size_t root_end = offsetof(mp_state_ctx_t, vm.qstr_last_chunk);
     gc_collect_root(ptrs + root_start / sizeof(void *), (root_end - root_start) / sizeof(void *));
-    printf("[%s] 3 %d %d\r\n", __func__, root_start, root_end);
+
     #if MICROPY_ENABLE_PYSTACK
     // Trace root pointers from the Python stack.
     ptrs = (void **)(void *)MP_STATE_THREAD(pystack_start);

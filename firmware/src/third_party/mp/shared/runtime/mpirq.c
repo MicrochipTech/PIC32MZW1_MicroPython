@@ -66,7 +66,7 @@ void mp_irq_init(mp_irq_obj_t *self, const mp_irq_methods_t *methods, mp_obj_t p
 }
 
 void mp_irq_handler(mp_irq_obj_t *self) {
-    if (self->handler != mp_const_none) {         
+    if (self->handler != mp_const_none) {
         if (self->ishard) {
             // When executing code within a handler we must lock the scheduler to
             // prevent any scheduled callbacks from running, and lock the GC to

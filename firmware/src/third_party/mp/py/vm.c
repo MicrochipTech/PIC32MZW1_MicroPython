@@ -35,7 +35,6 @@
 #include "py/runtime.h"
 #include "py/bc0.h"
 #include "py/profile.h"
-#include "definitions.h"
 
 // *FORMAT-OFF*
 
@@ -203,9 +202,6 @@
 //  MP_VM_RETURN_YIELD, ip, sp valid, yielded value in *sp
 //  MP_VM_RETURN_EXCEPTION, exception in state[0]
 mp_vm_return_kind_t MICROPY_WRAP_MP_EXECUTE_BYTECODE(mp_execute_bytecode)(mp_code_state_t *code_state, volatile mp_obj_t inject_exc) {
-#ifdef DEV_DEBUG
-    SYS_CONSOLE_PRINT("mp_execute_bytecode Enter\n");
-#endif
 #define SELECTIVE_EXC_IP (0)
 #if SELECTIVE_EXC_IP
 #define MARK_EXC_IP_SELECTIVE() { code_state->ip = ip; } /* stores ip 1 byte past last opcode */

@@ -47,7 +47,6 @@ int DEBUG_printf(const char *fmt, ...) {
 }
 #endif
 
-
 #if MICROPY_USE_INTERNAL_PRINTF
 
 #undef putchar  // Some stdlibs have a #define for putchar

@@ -55,6 +55,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "py/gc.h"
 #include "py/mphal.h"
 #include "py/mperrno.h"
+#include "py/builtin.h"
 #include "shared/runtime/pyexec.h"
 #include "shared/readline/readline.h"
 // *****************************************************************************

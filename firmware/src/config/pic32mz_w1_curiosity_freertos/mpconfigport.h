@@ -53,12 +53,12 @@
 #define MICROPY_PY_MICROPYTHON_MEM_INFO (1)
 #define MICROPY_PY___FILE__         (0)
 #define MICROPY_PY_GC               (1)
-#define MICROPY_PY_ARRAY            (0)
-#define MICROPY_PY_COLLECTIONS      (0)
+#define MICROPY_PY_ARRAY            (1)
+#define MICROPY_PY_COLLECTIONS      (1)
 #define MICROPY_PY_MATH             (0)
 #define MICROPY_PY_CMATH            (0)
 #define MICROPY_PY_IO               (0)
-#define MICROPY_PY_STRUCT           (0)
+#define MICROPY_PY_STRUCT           (1)
 #define MICROPY_PY_SYS              (0)
 #define MICROPY_CPYTHON_COMPAT      (0)
 #define MICROPY_LONGINT_IMPL        (MICROPY_LONGINT_IMPL_MPZ)
@@ -90,6 +90,7 @@ typedef int mp_off_t;
 #define MICROPY_PORT_BUILTINS \
     { MP_ROM_QSTR(MP_QSTR_open), MP_ROM_PTR(&mp_builtin_open_obj) },
 
+#if 0
 // extra builtin modules to add to the list of known ones
 extern const struct _mp_obj_module_t pyb_module;
 extern const struct _mp_obj_module_t test_module;
@@ -106,7 +107,7 @@ extern const struct _mp_obj_module_t utime_module;
     { MP_OBJ_NEW_QSTR(MP_QSTR_socket), (mp_obj_t)&mp_module_usocket }, \
     { MP_OBJ_NEW_QSTR(MP_QSTR_utime), (mp_obj_t)&utime_module }, \
 
-    
+#endif    
     
 #define MP_STATE_PORT MP_STATE_VM
 
@@ -130,5 +131,6 @@ typedef unsigned int uintptr_t;
 #define MICROPY_PY_UTIME_MP_HAL (1)
 #define MICROPY_PY_USELECT (1)
 #define MICROPY_EVENT_POLL_HOOK 
+//#define MICROPY_PY_UJSON (1)
 
 

@@ -36,7 +36,6 @@
 #include "py/stream.h"
 #include "py/mperrno.h"
 #include "py/mphal.h"
-#include "definitions.h"
 
 // Flags for poll()
 #define FLAG_ONESHOT (1)
@@ -128,7 +127,7 @@ STATIC mp_obj_t select_select(size_t n_args, const mp_obj_t *args) {
                 timeout = (mp_uint_t)(timeout_f * 1000);
             }
             #else
-            timeout = mp_obj_get_int(args[3]);
+            timeout = mp_obj_get_int(args[3]) * 1000;
             #endif
         }
     }
@@ -145,7 +144,7 @@ STATIC mp_obj_t select_select(size_t n_args, const mp_obj_t *args) {
     for (;;) {
         // poll the objects
         mp_uint_t n_ready = poll_map_poll(&poll_map, rwx_len);
-        //SYS_CONSOLE_PRINT("[%s] n_ready = %d\r\n", __func__, n_ready);
+
         if (n_ready > 0 || (timeout != (mp_uint_t)-1 && mp_hal_ticks_ms() - start_tick >= timeout)) {
             // one or more objects are ready, or we had a timeout
             mp_obj_t list_array[3];
@@ -347,8 +346,7 @@ STATIC const mp_obj_type_t mp_type_poll = {
 
 // poll()
 STATIC mp_obj_t select_poll(void) {
-    mp_obj_poll_t *poll = m_new_obj(mp_obj_poll_t);
-    poll->base.type = &mp_type_poll;
+    mp_obj_poll_t *poll = mp_obj_malloc(mp_obj_poll_t, &mp_type_poll);
     mp_map_init(&poll->poll_map, 0);
     poll->iter_cnt = 0;
     poll->ret_tuple = MP_OBJ_NULL;
@@ -374,5 +372,7 @@ const mp_obj_module_t mp_module_uselect = {
     .base = { &mp_type_module },
     .globals = (mp_obj_dict_t *)&mp_module_select_globals,
 };
+
+MP_REGISTER_MODULE(MP_QSTR_uselect, mp_module_uselect);
 
 #endif // MICROPY_PY_USELECT

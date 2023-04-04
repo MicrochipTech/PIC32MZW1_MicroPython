@@ -6,11 +6,13 @@ import utime
 
 i = 0
 connections = []
+ssid = 'demo_ap'
+password = '12345678'
 
 nic=network.WLAN(network.STA_IF)
 nic.active(True)
 nic.disconnect()
-nic.connect('mchp_demo', 'mchp5678')
+nic.connect(ssid, password)
 while not nic.isconnected():
     pass
 print("wifi connection is done")

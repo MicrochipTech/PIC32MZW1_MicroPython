@@ -32,9 +32,7 @@
 
 // collect(): run a garbage collection
 STATIC mp_obj_t py_gc_collect(void) {
-    printf("[%s] 1\r\n", __func__);
     gc_collect();
-    printf("[%s] 2\r\n", __func__);
     #if MICROPY_PY_GC_COLLECT_RETVAL
     return MP_OBJ_NEW_SMALL_INT(MP_STATE_MEM(gc_collected));
     #else
@@ -116,5 +114,7 @@ const mp_obj_module_t mp_module_gc = {
     .base = { &mp_type_module },
     .globals = (mp_obj_dict_t *)&mp_module_gc_globals,
 };
+
+MP_REGISTER_MODULE(MP_QSTR_gc, mp_module_gc);
 
 #endif

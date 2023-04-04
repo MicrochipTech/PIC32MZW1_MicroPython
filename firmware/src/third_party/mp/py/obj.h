@@ -419,9 +419,10 @@ typedef struct _mp_rom_obj_t { mp_const_obj_t o; } mp_rom_obj_t;
 // Declare a module as a builtin, processed by makemoduledefs.py
 // param module_name: MP_QSTR_<module name>
 // param obj_module: mp_obj_module_t instance
-// prarm enabled_define: used as `#if (enabled_define) around entry`
 
-#define MP_REGISTER_MODULE(module_name, obj_module, enabled_define)
+#ifndef NO_QSTR
+#define MP_REGISTER_MODULE(module_name, obj_module)
+#endif
 
 // Underlying map/hash table implementation (not dict object or map function)
 
@@ -731,6 +732,12 @@ extern const struct _mp_obj_exception_t mp_const_GeneratorExit_obj;
 #define mp_const_empty_map (mp_const_empty_dict_obj.map)
 
 // General API for objects
+
+// Helper versions of m_new_obj when you need to immediately set base.type.
+// Implementing this as a call rather than inline saves 8 bytes per usage.
+#define mp_obj_malloc(struct_type, obj_type) ((struct_type *)mp_obj_malloc_helper(sizeof(struct_type), obj_type))
+#define mp_obj_malloc_var(struct_type, var_type, var_num, obj_type) ((struct_type *)mp_obj_malloc_helper(sizeof(struct_type) + sizeof(var_type) * (var_num), obj_type))
+void *mp_obj_malloc_helper(size_t num_bytes, const mp_obj_type_t *type);
 
 // These macros are derived from more primitive ones and are used to
 // check for more specific object types.

@@ -1,12 +1,14 @@
 import network
 import socket
 
+ssid = 'demo_ap'
+password = '12345678'
 ip = '192.168.2.147'
 port = 6666
 
 nic=network.WLAN(network.STA_IF)
 nic.active(True)
-nic.connect('mchp_demo', 'mchp5678')
+nic.connect(ssid, password)
 while not nic.isconnected():
     pass
 print("wifi connection is done")

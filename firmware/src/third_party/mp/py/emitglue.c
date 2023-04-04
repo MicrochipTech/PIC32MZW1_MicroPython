@@ -36,7 +36,6 @@
 #include "py/bc.h"
 #include "py/objfun.h"
 #include "py/profile.h"
-#include "definitions.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_PRINT (1)
@@ -102,7 +101,6 @@ void mp_emit_glue_assign_native(mp_raw_code_t *rc, mp_raw_code_kind_t kind, void
     #if MICROPY_PERSISTENT_CODE_SAVE
     size_t n_children,
     uint16_t prelude_offset,
-    uint16_t n_qstr, mp_qstr_link_entry_t *qstr_link,
     #endif
     mp_uint_t scope_flags, mp_uint_t n_pos_args, mp_uint_t type_sig) {
 
@@ -145,8 +143,6 @@ void mp_emit_glue_assign_native(mp_raw_code_t *rc, mp_raw_code_kind_t kind, void
     #if MICROPY_PERSISTENT_CODE_SAVE
     rc->n_children = n_children;
     rc->prelude_offset = prelude_offset;
-    rc->n_qstr = n_qstr;
-    rc->qstr_link = qstr_link;
     #endif
 
     // These two entries are only needed for MP_CODE_NATIVE_ASM.
@@ -176,9 +172,6 @@ void mp_emit_glue_assign_native(mp_raw_code_t *rc, mp_raw_code_kind_t kind, void
 
 mp_obj_t mp_make_function_from_raw_code(const mp_raw_code_t *rc, const mp_module_context_t *context, const mp_obj_t *def_args) {
     DEBUG_OP_printf("make_function_from_raw_code %p\n", rc);
-#ifdef DEV_DEBUG
-    SYS_CONSOLE_PRINT("make_function_from_raw_code %p\r\n", rc);
-#endif
     assert(rc != NULL);
 
     // def_args must be MP_OBJ_NULL or a tuple

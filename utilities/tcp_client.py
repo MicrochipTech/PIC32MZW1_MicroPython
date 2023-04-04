@@ -34,7 +34,7 @@ while i < 10:
     except (socket.error, socket.timeout) as msg:
         print ('Error - ',msg)
     finally:
-        print('closing socket')
+        pass
 sock.close()
 sock = None
 sys.exit(1)

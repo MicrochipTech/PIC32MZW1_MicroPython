@@ -107,8 +107,6 @@ STATIC int parse_compile_execute(const void *source, mp_parse_input_kind_t input
             // source is a lexer, parse and compile the script
             qstr source_name = lex->source_name;
             mp_parse_tree_t parse_tree = mp_parse(lex, input_kind);
-            //mp_hal_stdout_tx_str("source_name");
-
             module_fun = mp_compile(&parse_tree, source_name, exec_flags & EXEC_FLAG_IS_REPL);
             #else
             mp_raise_msg(&mp_type_RuntimeError, MP_ERROR_TEXT("script compilation not supported"));
@@ -668,7 +666,7 @@ friendly_repl_reset:
                 }
             }
         }
-        
+
         ret = parse_compile_execute(&line, parse_input_kind, EXEC_FLAG_ALLOW_DEBUGGING | EXEC_FLAG_IS_REPL | EXEC_FLAG_SOURCE_IS_VSTR);
         if (ret & PYEXEC_FORCED_EXIT) {
             return ret;
