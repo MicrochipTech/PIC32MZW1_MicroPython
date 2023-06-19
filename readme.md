@@ -8,7 +8,7 @@ MicroPython is a Python 3 implementation with small subset of Python standard li
 With this feature, users can run python scripts on WFI32E01PC (PIC32MZW1) MCU to simplify the software development.  MicroPython highly abstract the software of Rio2. Users can develop the code more easy with the high-level language.   
 This is good for rapid prototyping , quick evaluation and automated tests.
 
-## Evaluation Board
+# Evaluation Board
 The MicroPython project can run on two PIC32MZW1 Evluation boards. They are the WFI32-IoT Development Board and the WFI32E Curiosity Board
 
 ## 1. WFI32-IoT Development Board
@@ -24,6 +24,14 @@ Click [here](https://www.microchip.com/en-us/development-tool/EV12F11A) for the 
 </p>
   <p align="center"><img width="450" src="images/wfi32e_curiosity_board.jpg">
   </p>
+
+# Software Requirements
+- [MPLAB X IDE](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide) (v6.00 or later)
+- [MPLAB XC32](https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-xc-compilers) (v4.30 or later)
+- [MPLAB Harmony 3](https://www.microchip.com/en-us/development-tools-tools-and-software/embedded-software-center/mplab-harmony-v3)
+
+
+	- Note: The project was developed and tested using the MPLAB X v6.05 and MPLAB XC32 v4.30
 
 # Pin Functionality
 Below table show the pin functionality on PIC32MZW1 module when it work with MicroPython. Some pins are configurable while some pins are fixed usage. Some pins are not availalbe as they are connected to some components on the board.  
@@ -93,7 +101,7 @@ gpio_interrupt | demonostrate the use of gpio interrupt | umachine, utime
 tcp_client | act as TCP client, create socket to conect to the TCP server and exchange data | network, socket
 tcp_server_with_multiple_socket | create TCP server to handle multiple client socket simultaneously | network, socket, utime, gc, uselect
 http_get | TCP client send HTTP Get command to get the webpage contents of a website | network, socket
-http_server | set as softAP mode and run as a HTTP server. Remote device can connect to the softAP and browser the HTTP website | umachine, network, socket
+http_server | set as softAP mode and run like a HTTP server. Remote device can connect to the softAP and browser the HTTP website | umachine, network, socket
 spi_read_sst26_flash | read SST26 SPI flash's manufacturer id and device id by using SPI bus | umachine, utime
 
 # Limitation
