@@ -148,7 +148,7 @@ STATIC mp_obj_t machine_timer_make_new(const mp_obj_type_t *type, size_t n_args,
 
 
 STATIC void machine_timer_isr(void *self_in) {
-    machine_timer_obj_t *self = self_in;
+    //machine_timer_obj_t *self = self_in;
 
 }
 
@@ -218,7 +218,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_KW(machine_timer_init_obj, 1, machine_timer_init)
 
 STATIC mp_obj_t machine_timer_value(mp_obj_t self_in) {
     machine_timer_obj_t *self = self_in;
-    double result;
+    double result = 0;
 
     //timer_get_counter_time_sec(self->group, self->index, &result);
 

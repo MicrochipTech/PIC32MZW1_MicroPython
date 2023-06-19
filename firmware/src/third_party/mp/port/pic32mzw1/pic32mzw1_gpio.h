@@ -24,3 +24,7 @@ typedef enum
 } PIC32MZW1_INT_CHAN;
 
 void gpio_set_dir(GPIO_PORT port, int pin, PIC32MZW1_GPIO_DIR dir);
+unsigned int gpio_get_level(GPIO_PORT port, int pin);
+void gpio_put(GPIO_PORT port, int pin, int val);
+void gpio_irq_disable( PIC32MZW1_INT_CHAN irq_chan );
+void gpio_irq_enable( PIC32MZW1_INT_CHAN irq_chan );

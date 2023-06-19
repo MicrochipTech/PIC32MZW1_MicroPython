@@ -711,7 +711,6 @@ int listen( SOCKET s, int backlog )
 SOCKET check_socket(SOCKET s)
 {
     struct BSDSocket *pListenSock;
-    TCP_SOCKET_INFO tcpSockInfo;
     unsigned int sockCount;
     TCP_SOCKET hTCP;
 
@@ -1504,7 +1503,7 @@ int recv( SOCKET s, char* buf, int len, int flags )
 {
     int     nBytes;
 	struct BSDSocket *socket = _getBsdSocket(s);
-    static close_cnt = 0;
+    static int close_cnt = 0;
 	if( socket == 0 )
     {
         errno = EBADF;

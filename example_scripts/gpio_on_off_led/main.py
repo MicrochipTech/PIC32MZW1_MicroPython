@@ -8,10 +8,10 @@ def mycallback(t):
     global cnt
     cnt = cnt + 1
     if (cnt % 2 != 0):
-        print("yellow led on") 
+        print("yellow led off") 
         p1.on()
     else:
-        print("yellow led off")
+        print("yellow led on")
         p1.off()
 
 

@@ -47,7 +47,7 @@ void mp_hal_delay_ms(mp_uint_t ms) {
 }
 
 void mp_hal_delay_us(mp_uint_t us) {
-
+    
 }
 
 void mp_hal_delay_ns(mp_uint_t ns) {
@@ -55,21 +55,21 @@ void mp_hal_delay_ns(mp_uint_t ns) {
 }
 
 mp_uint_t mp_hal_ticks_us(){
-    
+    return 0;
 }
 
 mp_uint_t mp_hal_ticks_ns(){
-    
+    return 0;
 }
 
 mp_uint_t mp_hal_ticks_cpu()
 {
-
+    return 0;
 }
 
 uint64_t mp_hal_time_ns()
 {
-    
+    return 0;
 }
 void mp_hal_set_interrupt_char(int c) {
     interrupt_char = c;

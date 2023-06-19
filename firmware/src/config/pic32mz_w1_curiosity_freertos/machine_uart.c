@@ -363,14 +363,14 @@ STATIC mp_obj_t machine_uart_init(size_t n_args, const mp_obj_t *args, mp_map_t 
 MP_DEFINE_CONST_FUN_OBJ_KW(machine_uart_init_obj, 1, machine_uart_init);
 
 STATIC mp_obj_t machine_uart_deinit(mp_obj_t self_in) {
-    machine_uart_obj_t *self = MP_OBJ_TO_PTR(self_in);
+    //machine_uart_obj_t *self = MP_OBJ_TO_PTR(self_in);
 
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(machine_uart_deinit_obj, machine_uart_deinit);
 
 STATIC mp_obj_t machine_uart_any(mp_obj_t self_in) {
-    machine_uart_obj_t *self = MP_OBJ_TO_PTR(self_in);
+    //machine_uart_obj_t *self = MP_OBJ_TO_PTR(self_in);
     size_t rxbufsize;
     rxbufsize = UART2_ReadCountGet();
     return MP_OBJ_NEW_SMALL_INT(rxbufsize);
@@ -378,7 +378,7 @@ STATIC mp_obj_t machine_uart_any(mp_obj_t self_in) {
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(machine_uart_any_obj, machine_uart_any);
 
 STATIC mp_obj_t machine_uart_sendbreak(mp_obj_t self_in) {
-    machine_uart_obj_t *self = MP_OBJ_TO_PTR(self_in);
+    //machine_uart_obj_t *self = MP_OBJ_TO_PTR(self_in);
     
     mp_printf(&mp_plat_print, "UART.sendbreak is not support\r\n");
 

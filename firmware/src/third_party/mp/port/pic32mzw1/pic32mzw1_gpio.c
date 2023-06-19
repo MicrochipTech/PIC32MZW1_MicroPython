@@ -32,8 +32,6 @@ unsigned int gpio_get_level(GPIO_PORT port, int pin)
 
 unsigned int gpio_set_irq(int pin, PIC32MZW1_INT_CHAN irq_chan, int irq_id, PIC32MZW1_IRQ_TRIGGER trigger, void* handler)
 {
-    uint32_t port_val;
-    
     //PIC32MZW1_INT_CHAN * pirq_chan = NULL;
     //pirq_chan = malloc(sizeof(PIC32MZW1_INT_CHAN));
     //*pirq_chan = irq_chan;
@@ -51,14 +49,14 @@ unsigned int gpio_set_irq(int pin, PIC32MZW1_INT_CHAN irq_chan, int irq_id, PIC3
             INT0R = irq_id;
             if (trigger == PIC32MZW1_IRQ_RISING_TRIGGER)
                 INTCONSET |= _INTCON_INT0EP_MASK;
-            EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_0, handler, NULL); // need correct to EXTERNAL_INT_0
+            EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_0, handler, (uintptr_t) NULL); // need correct to EXTERNAL_INT_0
             break;
         
         case PIC32MZW1_INT_CHANN_1:
             INT1R = irq_id;
             if (trigger == PIC32MZW1_IRQ_RISING_TRIGGER)
                 INTCONSET |= _INTCON_INT1EP_MASK;
-            EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_1, handler, NULL); // need correct to EXTERNAL_INT_1
+            EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_1, handler, (uintptr_t) NULL); // need correct to EXTERNAL_INT_1
             break;
         case PIC32MZW1_INT_CHANN_2:
             INT2R = irq_id;
@@ -66,21 +64,21 @@ unsigned int gpio_set_irq(int pin, PIC32MZW1_INT_CHAN irq_chan, int irq_id, PIC3
                 INTCONSET |= _INTCON_INT2EP_MASK;
             
             //printf("[%s] log1\r\n", __func__);
-            EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_2, handler, NULL);
+            EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_2, handler, (uintptr_t) NULL);
             break;
         case PIC32MZW1_INT_CHANN_3:
             INT3R = irq_id;
             if (trigger == PIC32MZW1_IRQ_RISING_TRIGGER)
                 INTCONSET |= _INTCON_INT3EP_MASK;
             
-            EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_3, handler, NULL);
+            EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_3, handler, (uintptr_t) NULL);
             break;
         case PIC32MZW1_INT_CHANN_4:
             INT4R = irq_id;
             if (trigger == PIC32MZW1_IRQ_RISING_TRIGGER)
                 INTCONSET |= _INTCON_INT4EP_MASK;
             
-            EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_4, handler, NULL);
+            EVIC_ExternalInterruptCallbackRegister(EXTERNAL_INT_4, handler, (uintptr_t) NULL);
             break;
         default:
             break;

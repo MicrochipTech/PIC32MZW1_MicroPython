@@ -115,7 +115,7 @@ struct BSDSocket
     };
 }; // Berkeley Socket structure
 
-
+SOCKET check_socket(SOCKET s);
 
 /*****************************************************************************
   Function:

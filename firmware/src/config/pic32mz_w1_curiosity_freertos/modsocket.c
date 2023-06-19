@@ -36,7 +36,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include <sys/errno.h>
+//#include <sys/errno.h>
 
 #include "py/runtime0.h"
 #include "py/nlr.h"
@@ -56,25 +56,25 @@
 #define MDNS_QUERY_TIMEOUT_MS (5000)
 #define MDNS_LOCAL_SUFFIX ".local"
 
-#define AF_INET (2)
-#define AF_INET6 (10)
+#define AF_INET_ (2)
+#define AF_INET6_ (10)
 
-#define SOCK_STREAM (100)  //Connection based byte streams. Use TCP for the Internet address family.
-#define SOCK_DGRAM  (110)  //Connectionless datagram socket. Use UDP for the Internet address family.
+#define SOCK_STREAM_ (100)  //Connection based byte streams. Use TCP for the Internet address family.
+#define SOCK_DGRAM_  (110)  //Connectionless datagram socket. Use UDP for the Internet address family.
 #define SOCK_RAW (3)
 
-#define IPPROTO_IP (0)
-#define IPPROTO_TCP (6)
-#define IPPROTO_UDP (17)
+#define IPPROTO_IP_ (0)
+#define IPPROTO_TCP_ (6)
+#define IPPROTO_UDP_ (17)
 
 // Socket level option.
-#define SOL_SOCKET      (0x0FFF)
+#define SOL_SOCKET_      (0x0FFF)
 
 // Common option flags per-socket.
-#define SO_REUSEADDR    (2)
-#define SO_KEEPALIVE    (9)
-#define SO_SNDTIMEO     (21)
-#define SO_RCVTIMEO     (20)
+#define SO_REUSEADDR_    (2)
+#define SO_KEEPALIVE_    (9)
+#define SO_SNDTIMEO_     (21)
+#define SO_RCVTIMEO_     (20)
 
 
 
@@ -119,8 +119,8 @@ STATIC mp_obj_t socket_make_new(const mp_obj_type_t *type_in, size_t n_args, siz
 
     socket_obj_t *sock = m_new_obj_with_finaliser(socket_obj_t);
     sock->base.type = type_in;
-    sock->domain = AF_INET;
-    sock->type = SOCK_STREAM;
+    sock->domain = AF_INET_;
+    sock->type = SOCK_STREAM_;
     sock->proto = 0;
     if (n_args > 0) {
         sock->domain = mp_obj_get_int(args[0]);
@@ -132,7 +132,7 @@ STATIC mp_obj_t socket_make_new(const mp_obj_type_t *type_in, size_t n_args, siz
         }
     }
 
-    sock->state = sock->type == SOCK_STREAM ? SOCKET_STATE_NEW : SOCKET_STATE_CONNECTED;
+    sock->state = sock->type == SOCK_STREAM_ ? SOCKET_STATE_NEW : SOCKET_STATE_CONNECTED;
 
     sock->fd = socket(sock->domain, sock->type, sock->proto);
     if (sock->fd < 0) {
@@ -191,7 +191,7 @@ STATIC mp_obj_t socket_accept(const mp_obj_t arg0) {
     socket_obj_t *self = MP_OBJ_TO_PTR(arg0);
 
     struct sockaddr addr;
-    socklen_t addr_len = sizeof(addr);
+    int addr_len = sizeof(addr);
 
     int new_fd = -1;
 
@@ -268,7 +268,7 @@ STATIC mp_obj_t socket_connect(const mp_obj_t self_in, const mp_obj_t addr_in) {
 
     do
     {
-        ret = connect(self->fd, (const struct sockaddr*) &addr, sizeof (struct sockaddr_in));
+        ret = connect(self->fd, (struct sockaddr*) &addr, sizeof (struct sockaddr_in));
     } while ((ret!=0) && (errno == EINPROGRESS));
     MP_THREAD_GIL_ENTER();
 
@@ -287,9 +287,9 @@ STATIC mp_obj_t socket_setsockopt(size_t n_args, const mp_obj_t *args) {
 
     switch (opt) {
         // level: SOL_SOCKET
-        case SO_REUSEADDR: {
+        case SO_REUSEADDR_: {
             int val = mp_obj_get_int(args[3]);
-            int ret = setsockopt(self->fd, SOL_SOCKET, opt, &val, sizeof(int));
+            int ret = setsockopt(self->fd, SOL_SOCKET_, opt, (const uint8_t *) &val, sizeof(int));
             if (ret != 0) {
                 mp_raise_OSError(errno);
             }
@@ -426,7 +426,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(socket_recv_obj, socket_recv);
 STATIC mp_obj_t socket_recvfrom(mp_obj_t self_in, mp_obj_t len_in) {
 
     struct sockaddr from;
-    socklen_t fromlen = sizeof(from);
+    int fromlen = sizeof(from);
 
     mp_obj_t tuple[2];
     tuple[0] = _socket_recvfrom(self_in, len_in, &from, &fromlen);
@@ -496,7 +496,7 @@ STATIC mp_obj_t socket_sendto(mp_obj_t self_in, mp_obj_t data_in, mp_obj_t addr_
 
     // create the destination address
     struct sockaddr_in to;
-    to.sin_family = AF_INET;
+    to.sin_family = AF_INET_;
     to.sin_port =netutils_parse_inet_addr(addr_in, (uint8_t *)&to.sin_addr, NETUTILS_BIG);
 
     // send the data
@@ -545,6 +545,7 @@ STATIC mp_uint_t socket_stream_write(mp_obj_t self_in, const void *buf, mp_uint_
     return r;
 }
 
+
 STATIC mp_uint_t socket_stream_ioctl(mp_obj_t self_in, mp_uint_t request, uintptr_t arg, int *errcode) {
     socket_obj_t *socket = self_in;
     mp_uint_t ret = 0;
@@ -556,7 +557,7 @@ STATIC mp_uint_t socket_stream_ioctl(mp_obj_t self_in, mp_uint_t request, uintpt
             return MP_STREAM_POLL_NVAL;
         
         }
-        int result = check_socket(socket->fd);
+        int result = 0;//check_socket(socket->fd);
         
         if (result >= 0)
         {
@@ -646,8 +647,8 @@ STATIC mp_obj_t socket_getaddrinfo(size_t n_args, const mp_obj_t *args) {
                 }
             }
         }
-        if (!((family == 0 || family == AF_INET)
-              && (type == 0 || type == SOCK_STREAM)
+        if (!((family == 0 || family == AF_INET_)
+              && (type == 0 || type == SOCK_STREAM_)
               && proto == 0
               && flags == 0)) {
             mp_warning(MP_WARN_CAT(RuntimeWarning), "unsupported getaddrinfo constraints");
@@ -674,7 +675,7 @@ STATIC mp_obj_t socket_getaddrinfo(size_t n_args, const mp_obj_t *args) {
             mp_const_none
         };
 
-        if (resi->ai_family == AF_INET) {
+        if (resi->ai_family == AF_INET_) {
 #ifdef PIC32MZW1_DEBUG             
             SYS_CONSOLE_PRINT("[%s] 0x%x 0x%x 0x%x 0x%x 0x%x\r\n", __func__, resi->ai_addr->sa_data[0], resi->ai_addr->sa_data[1], resi->ai_addr->sa_data[2], resi->ai_addr->sa_data[3], resi->ai_addr->sa_data[4]);
 #endif            
@@ -719,16 +720,16 @@ STATIC const mp_rom_map_elem_t mp_module_socket_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR_socket), MP_ROM_PTR(&socket_type) },
     { MP_ROM_QSTR(MP_QSTR_getaddrinfo), MP_ROM_PTR(&socket_getaddrinfo_obj) },
 
-    { MP_ROM_QSTR(MP_QSTR_AF_INET), MP_ROM_INT(AF_INET) },
-    { MP_ROM_QSTR(MP_QSTR_AF_INET6), MP_ROM_INT(AF_INET6) },
-    { MP_ROM_QSTR(MP_QSTR_SOCK_STREAM), MP_ROM_INT(SOCK_STREAM) },
-    { MP_ROM_QSTR(MP_QSTR_SOCK_DGRAM), MP_ROM_INT(SOCK_DGRAM) },
+    { MP_ROM_QSTR(MP_QSTR_AF_INET), MP_ROM_INT(AF_INET_) },
+    { MP_ROM_QSTR(MP_QSTR_AF_INET6), MP_ROM_INT(AF_INET6_) },
+    { MP_ROM_QSTR(MP_QSTR_SOCK_STREAM), MP_ROM_INT(SOCK_STREAM_) },
+    { MP_ROM_QSTR(MP_QSTR_SOCK_DGRAM), MP_ROM_INT(SOCK_DGRAM_) },
     { MP_ROM_QSTR(MP_QSTR_SOCK_RAW), MP_ROM_INT(SOCK_RAW) },
-    { MP_ROM_QSTR(MP_QSTR_IPPROTO_TCP), MP_ROM_INT(IPPROTO_TCP) },
-    { MP_ROM_QSTR(MP_QSTR_IPPROTO_UDP), MP_ROM_INT(IPPROTO_UDP) },
-    { MP_ROM_QSTR(MP_QSTR_IPPROTO_IP), MP_ROM_INT(IPPROTO_IP) },
-    { MP_ROM_QSTR(MP_QSTR_SOL_SOCKET), MP_ROM_INT(SOL_SOCKET) },
-    { MP_ROM_QSTR(MP_QSTR_SO_REUSEADDR), MP_ROM_INT(SO_REUSEADDR) },
+    { MP_ROM_QSTR(MP_QSTR_IPPROTO_TCP), MP_ROM_INT(IPPROTO_TCP_) },
+    { MP_ROM_QSTR(MP_QSTR_IPPROTO_UDP), MP_ROM_INT(IPPROTO_UDP_) },
+    { MP_ROM_QSTR(MP_QSTR_IPPROTO_IP), MP_ROM_INT(IPPROTO_IP_) },
+    { MP_ROM_QSTR(MP_QSTR_SOL_SOCKET), MP_ROM_INT(SOL_SOCKET_) },
+    { MP_ROM_QSTR(MP_QSTR_SO_REUSEADDR), MP_ROM_INT(SO_REUSEADDR_) },
 };
 
 STATIC MP_DEFINE_CONST_DICT(mp_module_socket_globals, mp_module_socket_globals_table);
