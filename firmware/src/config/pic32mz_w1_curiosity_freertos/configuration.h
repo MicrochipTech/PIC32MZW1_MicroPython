@@ -237,6 +237,10 @@ extern "C" {
 #define WOLFSSL_USER_IO
 #define NO_WRITEV
 #define MICROCHIP_TCPIP
+#include "osal/osal.h"
+#define XMALLOC_OVERRIDE
+#define XMALLOC(s, h, type)  OSAL_Malloc((s))
+#define XFREE(p, h, type)    OSAL_Free((p))
 #define HAVE_FFDHE_2048
 #define NO_PWDBASED
 #define HAVE_TLS_EXTENSIONS
@@ -491,11 +495,11 @@ extern "C" {
 /*** TCPIP Heap Configuration ***/
 #define TCPIP_STACK_USE_EXTERNAL_HEAP
 
-#define TCPIP_STACK_MALLOC_FUNC                     malloc
+#define TCPIP_STACK_MALLOC_FUNC                     pvPortMalloc
 
-#define TCPIP_STACK_CALLOC_FUNC                     calloc
+#define TCPIP_STACK_CALLOC_FUNC                     APP_Calloc
 
-#define TCPIP_STACK_FREE_FUNC                       free
+#define TCPIP_STACK_FREE_FUNC                       vPortFree
 
 
 

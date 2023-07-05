@@ -979,13 +979,14 @@
           <itemPath>../src/config/pic32mz_w1_curiosity_freertos/machine_adcblock.h</itemPath>
           <itemPath>../src/config/pic32mz_w1_curiosity_freertos/pic32bit_mphal.c</itemPath>
           <itemPath>../src/config/pic32mz_w1_curiosity_freertos/pic32bit_mphal.h</itemPath>
+          <itemPath>../src/app_calloc_def.c</itemPath>
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f4" displayName="FreeRTOS" projectFiles="true">
         <logicalFolder name="f1" displayName="Source" projectFiles="true">
           <logicalFolder name="f1" displayName="portable" projectFiles="true">
             <logicalFolder name="f1" displayName="MemMang" projectFiles="true">
-              <itemPath>../src/third_party/rtos/FreeRTOS/Source/portable/MemMang/heap_3.c</itemPath>
+              <itemPath>../src/third_party/rtos/FreeRTOS/Source/portable/MemMang/heap_4.c</itemPath>
             </logicalFolder>
             <logicalFolder name="f2" displayName="MPLAB" projectFiles="true">
               <logicalFolder name="f1" displayName="PIC32MZ" projectFiles="true">
@@ -2002,7 +2003,7 @@
         <property key="generate-16-bit-code" value="false"/>
         <property key="generate-cross-reference-file" value="false"/>
         <property key="generate-micro-compressed-code" value="false"/>
-        <property key="heap-size" value="150000"/>
+        <property key="heap-size" value="512"/>
         <property key="input-libraries" value=""/>
         <property key="kseg-length" value=""/>
         <property key="kseg-origin" value=""/>
@@ -2014,7 +2015,7 @@
         <property key="optimization-level" value=""/>
         <property key="preprocessor-macros" value=""/>
         <property key="remove-unused-sections" value="true"/>
-        <property key="report-memory-usage" value="false"/>
+        <property key="report-memory-usage" value="true"/>
         <property key="serial-length" value=""/>
         <property key="serial-origin" value=""/>
         <property key="stack-size" value=""/>

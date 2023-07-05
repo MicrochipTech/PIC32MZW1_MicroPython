@@ -200,6 +200,7 @@ void _SYS_WIFI_Task(  void *pvParameters  )
 {
     while(1)
     {
+        //SYS_CONSOLE_PRINT("xPortGetMinimumEverFreeHeapSize = %d\r\n", xPortGetMinimumEverFreeHeapSize());
         SYS_WIFI_Tasks(sysObj.syswifi);
         vTaskDelay(4 / portTICK_PERIOD_MS);
     }

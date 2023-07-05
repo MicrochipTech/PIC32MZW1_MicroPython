@@ -1035,22 +1035,17 @@ int connect( SOCKET s, struct sockaddr* name, int namelen )
                 if (socket->addressFamily == AF_INET)
                 {
 #endif
-                    //SYS_CONSOLE_PRINT("[%s] log2\r\n", __func__);
                     if (socket->localIP == IP_ADDR_ANY)
                     {
-                        //SYS_CONSOLE_PRINT("[%s] log3\r\n", __func__);
                         socket->SocketID = NET_PRES_SocketOpen(0, NET_PRES_SKT_DEFAULT_STREAM_CLIENT, IP_ADDRESS_TYPE_IPV4, remotePort, (NET_PRES_ADDRESS *)&remoteIP, 0);
                         if(socket->SocketID == INVALID_SOCKET)
                         {
-                            //SYS_CONSOLE_PRINT("[%s] log31\r\n", __func__);
                             errno = ENOBUFS;
                             return SOCKET_ERROR;
                         }
-
                     }
                     else
                     {
-                        //SYS_CONSOLE_PRINT("[%s] log4\r\n", __func__);
                         socket->SocketID = NET_PRES_SocketOpen(0, NET_PRES_SKT_DEFAULT_STREAM_CLIENT, IP_ADDRESS_TYPE_IPV4, 0, 0, 0);
                         if(socket->SocketID == INVALID_SOCKET)
                         {

@@ -61,7 +61,7 @@ files:
   physicalPath: library\tcpip\src
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 6B86BD81F4EA8E9D3D0871C72A68671D
+  userChecksum: 11BBE814E9CEAC9BF0F04432235C7010
 - generatedChecksum: 8DF07C4DA43854B1B9F8288520D5FEEC
   logicalPath: wolfcrypt
   name: blake2b.c
@@ -559,13 +559,13 @@ files:
   security: NON_SECURE
   type: SOURCE
   userChecksum: C13333EC95D004AAFF2F78E20CDAC054
-- generatedChecksum: 1EA5B9CC1D496CDD236B90D730EF0C5A
+- generatedChecksum: 26AC1C8E4ACE31258A8C6EA7B5FB034C
   logicalPath: FreeRTOS\Source\portable\MemMang
-  name: heap_3.c
+  name: heap_4.c
   physicalPath: ..\..\third_party\rtos\FreeRTOS\Source\portable\MemMang
   security: NON_SECURE
   type: SOURCE
-  userChecksum: 1EA5B9CC1D496CDD236B90D730EF0C5A
+  userChecksum: 26AC1C8E4ACE31258A8C6EA7B5FB034C
 - generatedChecksum: 10E0F557204916FC4EBA9DEB6F35095F
   logicalPath: config\pic32mz_w1_curiosity_freertos\library\tcpip\src\common
   name: helpers.c
@@ -1805,13 +1805,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: AF3A8D8AA610E7DFD3E38DDAC5E42074
-- generatedChecksum: E269855356C4F035C71C885DAB33B8DF
+- generatedChecksum: 616B7B8BE206793C0097D6FDE4C8B5C5
   logicalPath: config\pic32mz_w1_curiosity_freertos
   name: FreeRTOSConfig.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: E269855356C4F035C71C885DAB33B8DF
+  userChecksum: 616B7B8BE206793C0097D6FDE4C8B5C5
 - generatedChecksum: 774011E09B9B257B4F572704E6AB9713
   logicalPath: FreeRTOS\Source\portable\MPLAB\PIC32MZ
   name: ISR_Support.h
@@ -1895,7 +1895,7 @@ files:
   physicalPath: library\tcpip\src
   security: NON_SECURE
   type: HEADER
-  userChecksum: 7774A96BC3229FF92454D22B75D94FA3
+  userChecksum: 66C68FA48C5D7212EA683DAC4476C44C
 - generatedChecksum: 51DB7354955BCB285F1FDACADB472032
   logicalPath: wolfcrypt
   name: blake2-impl.h
@@ -1987,13 +1987,13 @@ files:
   security: NON_SECURE
   type: HEADER
   userChecksum: 15AB6693CC2E1EE7AB845EE42A6AC762
-- generatedChecksum: EC3AD339DF54D2DFF1C78DAC09C49F95
+- generatedChecksum: 47870D8D77FD06965BE7C1D0B49B0C1D
   logicalPath: config\pic32mz_w1_curiosity_freertos
   name: configuration.h
   physicalPath: ''
   security: NON_SECURE
   type: HEADER
-  userChecksum: 6B9B26470D3CC8E0785B3D21A274FF32
+  userChecksum: AB6167D6DBD6FA077E961D0D4E31D7BC
 - generatedChecksum: B6A4EE22377BE2ADC897BD90ABC89649
   logicalPath: wolfcrypt
   name: cpuid.h
@@ -5325,7 +5325,7 @@ settings:
   delimiter: ''
   key: heap-size
   security: NON_SECURE
-  value: '150000'
+  value: '20000'
 - append: false
   category: C32-LD
   delimiter: ''

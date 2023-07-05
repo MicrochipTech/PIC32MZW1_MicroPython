@@ -19,6 +19,7 @@
 #ifndef USER_H
 #define USER_H
 
+#include "app_calloc_def.h"
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
 

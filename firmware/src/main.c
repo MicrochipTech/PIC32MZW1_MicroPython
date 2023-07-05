@@ -63,7 +63,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // Section: Main Entry Point
 // *****************************************************************************
 // *****************************************************************************
-static char heap[8000];
+static char heap[64000];
 
 //void TIMER2_InterruptSvcRoutine(uint32_t status, uintptr_t context)
 //{

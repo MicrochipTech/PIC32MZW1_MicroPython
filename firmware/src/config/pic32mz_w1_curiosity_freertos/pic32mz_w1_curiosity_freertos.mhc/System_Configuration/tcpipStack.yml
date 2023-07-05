@@ -11,6 +11,8 @@ children:
       children:
       - type: Dynamic
         attributes: {id: sysWifiPic32mzw1, value: calloc}
+      - type: User
+        attributes: {value: APP_Calloc}
   - type: Integer
     attributes: {id: TCPIP_STACK_DRAM_SIZE}
     children:
@@ -25,6 +27,8 @@ children:
       children:
       - type: Dynamic
         attributes: {id: sysWifiPic32mzw1, value: free}
+      - type: User
+        attributes: {value: vPortFree}
   - type: Integer
     attributes: {id: TCPIP_STACK_HEAP_SIZE_RECOMMEND}
     children:
@@ -39,6 +43,8 @@ children:
       children:
       - type: Dynamic
         attributes: {id: sysWifiPic32mzw1, value: malloc}
+      - type: User
+        attributes: {value: pvPortMalloc}
   - type: String
     attributes: {id: TCPIP_STACK_NET_INTERFACE_NAME_IDX0}
     children:
